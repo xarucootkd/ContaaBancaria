@@ -4,7 +4,6 @@
 
     FUNCIONALIDADES:
 
-    - Dados da conta
     - Consultar Saldo
     - Enviar Valor
     - Receber Valor
@@ -61,7 +60,7 @@ public class ContaBancaria {
             if (escolhaUser == 1) {
                 System.out.printf("Digite o valor para deposito:  %n");
                 double valorReceber = entradaUser.nextDouble();
-                saldo = saldo + valorReceber;
+                saldo += valorReceber;
                 System.out.println("Deposito feito com sucesso");
 
             /*
@@ -74,7 +73,7 @@ public class ContaBancaria {
                 if (saldo < valorTransferir) {
                     System.out.println("Transferência não realizada, saldo insuficiente.");
                 } else {
-                    saldo = saldo - valorTransferir;
+                    saldo -= valorTransferir;
                     System.out.println("Transferência realizada com sucesso.");
 
                 }
@@ -92,10 +91,9 @@ public class ContaBancaria {
             if (!decisaoUser.equals("s")) {
                 break;
             } else {
+
                 System.out.println("Voltando para o inicio...");
-                System.out.println("Antes de limpar...");
                 clearScreen(); // utilizando para limpar quando voltar ao inicio
-                System.out.println("Depois de limpar!");
 
             }
         }
