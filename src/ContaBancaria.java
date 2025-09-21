@@ -15,77 +15,89 @@
 import java.util.Scanner;
 
 public class ContaBancaria {
+//    Função para "limpar" a tela
+    public static void clearScreen() {
+        for (int i = 0; i < 50; i++) {
+            System.out.println();
+        }
+    }
 
     public static void main(String[] args) {
 
         Scanner entradaUser = new Scanner(System.in);
 
-        double saldo = 3000;
-                
-        System.out.printf("""
-                ***********************
-                       Banco SHD
-                
-                Dados iniciais do cliente:
-                
-                Nome: Paulo Pantoja
-                Tipo conta: Corrente
-                Saldo: %.2f
-                
-                ***********************
-                """, saldo);
+        double saldo = 3000; // Saldo Inicial
 
-        System.out.println("""
-                Operações
-                
-                1- Consultar saldo
-                2- Receber valor
-                3- Transferir valor
-                4- Sair
-                """);
-
-        System.out.print("Digite a opção desejada: ");
-
-
-        int escolhaUser = entradaUser.nextInt();
-
-        /*
-            Funcionalidade CONSULTAR SALDO
-         */
-        if (escolhaUser == 1) {
+        while (true) {
             System.out.printf("""
-                    *************************************
-                      Seu saldo atual é de: R$ %.2f
-                    *************************************
+                    ***********************
+                           Banco X17
+                    
+                    Dados iniciais do cliente:
+                    
+                    Nome: Paulo Pantoja
+                    Tipo conta: Corrente
+                    Saldo: %.2f
+                    
+                    ***********************
                     """, saldo);
-        /*
-            Funcionalidade RECEBER
-         */
-        } else if (escolhaUser == 2 ) {
-            System.out.printf("Digite o valor para deposito:  %n");
-            double valorReceber = entradaUser.nextDouble();
-            saldo = saldo + valorReceber;
-            System.out.println("Deposito feito com sucesso");
-            System.out.println(saldo);
 
-        /*
-            Funcionalidade TRANSFERIR
-         */
-        } else if (escolhaUser == 3) {
-            System.out.printf("Digite o valor para transferência:  %n");
-            double valorTransferir = entradaUser.nextDouble();
-            saldo = saldo - valorTransferir;
+            System.out.println("""
+                    Operações
+                    
+                    1- Receber valor
+                    2- Transferir valor
+                    3- Sair
+                    """);
 
-            if (saldo < 0) {
-                System.out.println("Transferência não realizada, saldo insuficiente.");
+            System.out.print("Digite a opção desejada (1, 2 ou 3): ");
+
+
+            int escolhaUser = entradaUser.nextInt();
+
+            /*
+                Funcionalidade RECEBER
+             */
+            if (escolhaUser == 1) {
+                System.out.printf("Digite o valor para deposito:  %n");
+                double valorReceber = entradaUser.nextDouble();
+                saldo = saldo + valorReceber;
+                System.out.println("Deposito feito com sucesso");
+
+            /*
+                Funcionalidade TRANSFERIR
+             */
+            } else if (escolhaUser == 2) {
+                System.out.printf("Digite o valor para transferência:  %n");
+                double valorTransferir = entradaUser.nextDouble();
+
+                if (saldo < valorTransferir) {
+                    System.out.println("Transferência não realizada, saldo insuficiente.");
+                } else {
+                    saldo = saldo - valorTransferir;
+                    System.out.println("Transferência realizada com sucesso.");
+
+                }
+            } else if (escolhaUser == 3) {
+                System.out.println("Saindo...");
+                break;
             } else {
-                System.out.println("Transferência realizada com sucesso.");
-                System.out.println(saldo);
-//                System.out.println("Deseja realizar outra operação? (s/n)"); Irei Adicionar quando colocar o laço While
+                System.out.printf("Digite uma opção válida.%n%n");
+            }
+
+
+            System.out.println("Deseja realizar outra operação? (s/n)");
+            entradaUser.nextLine(); // Consumindo a quebra de linha
+            String decisaoUser = entradaUser.nextLine();
+            if (!decisaoUser.equals("s")) {
+                break;
+            } else {
+                System.out.println("Voltando para o inicio...");
+                System.out.println("Antes de limpar...");
+                clearScreen(); // utilizando para limpar quando voltar ao inicio
+                System.out.println("Depois de limpar!");
 
             }
         }
-
     }
-
 }
