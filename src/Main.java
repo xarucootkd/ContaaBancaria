@@ -42,10 +42,10 @@ public class Main {
 
 
         while (true) {
+            limparTela();
             contaUser.exibirDadosConta();
             System.out.println("Suas Informções estão corretas? (s / n)");
             String decisaoUser = entradaUser.nextLine();
-            entradaUser.nextLine();
             if (decisaoUser.equals("s")) {
                 break;
             } else {
@@ -54,15 +54,16 @@ public class Main {
                         2- Tipo da Conta
                         3- Continuar
                         
-                        Escolha o que deseja alterar:
-                        """);
+                        Escolha o que deseja alterar:""");
                 int escolhaAlterarUser = entradaUser.nextInt();
+                entradaUser.nextLine();
                 if (escolhaAlterarUser == 1) {
                     System.out.println("Digite o nome da Conta:");
                     contaUser.setNome(entradaUser.nextLine());
                 } else if (escolhaAlterarUser == 2) {
                     contaUser.exibirTipoConta();
                     contaUser.setTipoConta(entradaUser.nextInt());
+                    entradaUser.nextLine();
                 } else {
                     break;
                 }
