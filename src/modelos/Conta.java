@@ -20,7 +20,7 @@ package modelos;
                     Ativo: %s
                     
                     ***********************
-                    """, nome, tipoContaUser(tipoConta), saldo, isAtivo());
+                    """, nome, getTipoConta(), saldo, isAtivo());
     }
 
     public void exibirOpcoes() {
@@ -47,7 +47,15 @@ package modelos;
         System.out.print("Digite a opção desejada (1 ou 2): ");
     }
 
-    public String isAtivo() {
+     public String getTipoConta() {
+         return tipoContaUser(tipoConta);
+     }
+
+    public boolean getAtivo(){
+        return ativoConta;
+    }
+
+     public String isAtivo() {
         if (ativoConta) {
             return "Sim";
         } else {
@@ -81,10 +89,15 @@ package modelos;
 
     public void trocarAtivo() {
         this.ativoConta = !this.ativoConta;
+
+        if (ativoConta){
+            System.out.println("Conta Ativada");
+        } else {
+            System.out.println("Conta Desativada");
+        }
     }
 
-    public String tipoContaUser (int escolhaContaUser) {
-            System.out.println("Tipo de conta: ");
+     public String tipoContaUser (int escolhaContaUser) {
             String tipoContaUser;
 
             if (escolhaContaUser == 1) {
@@ -96,6 +109,10 @@ package modelos;
             } else {
                 return "Digite uma opção válida. ";
             }
+        }
+
+        public void desativadoMensagem () {
+                System.out.println("Ative sua conta para realizar essa ação.");
         }
 
 }

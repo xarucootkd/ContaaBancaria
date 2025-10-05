@@ -12,9 +12,17 @@
  */
 
 import modelos.Conta;
+
 import java.util.Scanner;
 
 public class Main {
+
+    public static void checkAtivo () {
+
+
+
+    }
+
 
 //    Função para "limpar" a tela
     public static void limparTela() {
@@ -24,11 +32,10 @@ public class Main {
     }
 
     public static void main(String[] args) {
-
         Scanner entradaUser = new Scanner(System.in);
         Conta contaUser = new Conta();
 
-        // ESSA PARTE DO CODIGO TA COM BUG
+
         System.out.println("""
                     ***********************
                            Banco X17
@@ -76,15 +83,31 @@ public class Main {
             contaUser.exibirOpcoes();
 
             int escolhaUser = entradaUser.nextInt();
+            entradaUser.nextLine();
 
             if (escolhaUser == 1) { //Funcionalidade RECEBER
-                System.out.printf("Digite o valor para depositar: %n");
-                contaUser.depositar(entradaUser.nextDouble());
-                System.out.println("Deposito feito com sucesso");
+                if (contaUser.getAtivo()) {
+                    System.out.printf("Digite o valor para depositar: %n");
+                    contaUser.depositar(entradaUser.nextDouble());
+                    entradaUser.nextLine();
+                    System.out.println("Deposito feito com sucesso");
+                } else {
+                    contaUser.desativadoMensagem();
+                }
 
             } else if (escolhaUser == 2) { //Funcionalidade TRANSFERIR
-                System.out.printf("Digite o valor para transferência:  %n");
-                contaUser.transferir(entradaUser.nextDouble());
+                if (contaUser.getAtivo()) {
+                    if (contaUser.getTipoConta().equals("Salário")) {
+                        System.out.println("Seu tipo de conta é apenas para deposito.");
+                        System.out.println("Altere seu tipo de conta para poder transfeir");
+                    } else {
+                        System.out.printf("Digite o valor para transferência:  %n");
+                        contaUser.transferir(entradaUser.nextDouble());
+                        entradaUser.nextLine();
+                    }
+                } else {
+                    contaUser.desativadoMensagem();
+                }
 
             } else if (escolhaUser == 3) {
                 contaUser.trocarAtivo();
@@ -97,8 +120,7 @@ public class Main {
             }
 
             System.out.println("ENTER para voltar ao inicio.");
-            entradaUser.nextLine(); // Consumindo a quebra de linha
-            String decisaoUser = entradaUser.nextLine();
+            entradaUser.nextLine();
             limparTela();
 
         }
