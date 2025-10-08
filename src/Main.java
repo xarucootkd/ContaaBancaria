@@ -17,13 +17,6 @@ import java.util.Scanner;
 
 public class Main {
 
-    public static void checkAtivo () {
-
-
-
-    }
-
-
 //    Função para "limpar" a tela
     public static void limparTela() {
         for (int i = 0; i < 50; i++) {
